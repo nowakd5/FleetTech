@@ -19,131 +19,138 @@
             </div>
 
             <p class="nav-heading">WORKSPACE</p>
+
             <nav>
-                <button class="nav-link active" data-view="dashboard">
-                    Dashboard
-                </button>
-                <button class="nav-link" data-view="trucks">
-                    Truck Records
-                </button>
-                <button class="nav-link" data-view="equipment">
-                    Equipment Inventory
-                </button>
+                <button class="nav-link active" data-view="dashboard">Dashboard</button>
+                <button class="nav-link" data-view="trucks">Truck Inventory</button>
+                <button class="nav-link" data-view="equipment">Equipment</button>
             </nav>
 
             <div class="sidebar-footer">
                 <p>DEMO ENVIRONMENT</p>
-                <span>Fictional company data</span>
+                <span>FleetTech Prototype v1.0</span>
             </div>
         </aside>
 
         <main class="main-content">
             <header class="topbar">
                 <div>
-                    <p class="eyebrow">FLEET OPERATIONS</p>
-                    <h1 id="page-title">Dashboard</h1>
+                    <p class="eyebrow">FLEET OPERATIONS / IT</p>
+                    <h1 id="page-title">Dashboard Overview</h1>
                 </div>
                 <div class="demo-badge">
                     <span class="status-dot"></span>
-                    Prototype
+                    Demo Data Only
                 </div>
             </header>
 
-            <section id="dashboard-view" class="view">
+            <!-- DASHBOARD -->
+            <section id="dashboard-view">
                 <div class="welcome">
-                    <div>
-                        <p class="eyebrow">ASSET OVERVIEW</p>
-                        <h2>Welcome to FleetTech</h2>
-                        <p>Keep track of the technology assigned to your work trucks.</p>
-                    </div>
+                    <p class="eyebrow">FLEETTECH OVERVIEW</p>
+                    <h2>Your fleet's IT equipment, all in one place.</h2>
+                    <p>
+                        Track company devices assigned to work trucks,
+                        check equipment status, and identify items needing attention.
+                    </p>
                 </div>
 
                 <div class="stats-grid">
                     <article class="stat-card">
                         <p>Total Trucks</p>
                         <h2 id="total-trucks">0</h2>
-                        <span>Company vehicles tracked</span>
+                        <span>Vehicles in the demo inventory</span>
                     </article>
 
                     <article class="stat-card">
                         <p>Tracked Devices</p>
                         <h2 id="total-devices">0</h2>
-                        <span>Technology assets recorded</span>
+                        <span>IT assets assigned to trucks</span>
                     </article>
 
                     <article class="stat-card attention-card">
                         <p>Needs Attention</p>
                         <h2 id="attention-count">0</h2>
-                        <span>Maintenance or issue reported</span>
+                        <span>Items with an issue or in maintenance</span>
                     </article>
                 </div>
 
                 <section class="panel">
                     <div class="panel-heading">
                         <div>
-                            <h2>Equipment Needing Attention</h2>
-                            <p>Devices marked for maintenance or reporting an issue.</p>
+                            <h2>Equipment Requiring Attention</h2>
+                            <p>Devices marked with an issue or maintenance status.</p>
                         </div>
                         <button class="text-button" data-view="equipment">
-                            View inventory →
+                            View Equipment
                         </button>
                     </div>
                     <div id="attention-list" class="empty-state">
-                        Equipment requiring attention will appear here.
+                        Loading equipment status...
                     </div>
                 </section>
 
                 <section class="panel">
                     <div class="panel-heading">
                         <div>
-                            <h2>Recent Equipment Inventory</h2>
-                            <p>A quick look at tracked technology.</p>
+                            <h2>Equipment Inventory Snapshot</h2>
+                            <p>A quick look at the first five tracked devices.</p>
                         </div>
+                        <button class="text-button" data-view="equipment">
+                            View All Equipment
+                        </button>
                     </div>
+
                     <div class="table-wrap">
                         <table>
                             <thead>
                                 <tr>
                                     <th>Asset ID</th>
-                                    <th>Equipment</th>
+                                    <th>Equipment Name</th>
                                     <th>Assigned Truck</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
-                            <tbody id="dashboard-equipment">
-                                <tr>
-                                    <td colspan="4">Loading inventory...</td>
-                                </tr>
-                            </tbody>
+                            <tbody id="dashboard-equipment"></tbody>
                         </table>
                     </div>
                 </section>
             </section>
 
-            <section id="trucks-view" class="view hidden">
+            <!-- TRUCK INVENTORY -->
+            <section id="trucks-view" class="hidden">
                 <section class="panel">
                     <div class="panel-heading">
                         <div>
-                            <h2>Truck Records</h2>
-                            <p>View company trucks and their assigned employees.</p>
+                            <h2>Truck Inventory</h2>
+                            <p>Find company trucks and see their assigned IT equipment.</p>
                         </div>
                     </div>
+
                     <div class="toolbar">
-                        <input id="truck-search" type="search"
-                               placeholder="Search trucks or employees...">
-                        <select id="truck-status-filter">
-                            <option value="all">All truck statuses</option>
+                        <input
+                            id="truck-search"
+                            type="search"
+                            placeholder="Search truck ID or employee..."
+                            aria-label="Search trucks"
+                        >
+
+                        <select id="truck-status-filter" aria-label="Filter trucks by status">
+                            <option value="All">All Truck Statuses</option>
                             <option value="Active">Active</option>
                             <option value="Inactive">Inactive</option>
                         </select>
                     </div>
+
                     <div class="table-wrap">
                         <table>
                             <thead>
                                 <tr>
                                     <th>Truck ID</th>
                                     <th>Assigned Employee</th>
-                                    <th>Status</th>
+                                    <th>Truck Status</th>
+                                    <th>Devices Assigned</th>
+                                    <th>Record Type</th>
                                 </tr>
                             </thead>
                             <tbody id="truck-table"></tbody>
@@ -152,7 +159,8 @@
                 </section>
             </section>
 
-            <section id="equipment-view" class="view hidden">
+            <!-- EQUIPMENT INVENTORY -->
+            <section id="equipment-view" class="hidden">
                 <section class="panel">
                     <div class="panel-heading">
                         <div>
@@ -160,24 +168,33 @@
                             <p>Search devices and update their status.</p>
                         </div>
                     </div>
+
                     <div class="toolbar">
-                        <input id="equipment-search" type="search"
-                               placeholder="Search asset ID, type, or truck...">
-                        <select id="equipment-status-filter">
-                            <option value="all">All equipment statuses</option>
+                        <input
+                            id="equipment-search"
+                            type="search"
+                            placeholder="Search asset, device, truck, or employee..."
+                            aria-label="Search equipment"
+                        >
+
+                        <select id="equipment-status-filter" aria-label="Filter equipment by status">
+                            <option value="All">All Equipment Statuses</option>
                             <option value="Active">Active</option>
                             <option value="Maintenance">Maintenance</option>
                             <option value="Issue">Issue</option>
                         </select>
                     </div>
+
                     <div class="table-wrap">
                         <table>
                             <thead>
                                 <tr>
                                     <th>Asset ID</th>
+                                    <th>Equipment Name</th>
                                     <th>Equipment Type</th>
                                     <th>Assigned Truck</th>
                                     <th>Status</th>
+                                    <th>Update Status / Employee</th>
                                 </tr>
                             </thead>
                             <tbody id="equipment-table"></tbody>
@@ -187,7 +204,7 @@
             </section>
 
             <footer class="footer">
-                FleetTech Demo · Fictional records only · Not for live operations
+                FleetTech Demo &middot; Fictional records only &middot; Not for live operations
             </footer>
         </main>
     </div>
